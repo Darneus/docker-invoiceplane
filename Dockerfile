@@ -1,5 +1,5 @@
 FROM ubuntu:impish-20211102
-LABEL maintainer="sameer@damagehead.com"
+LABEL maintainer="darneus@gmail.com"
 
 ENV PHP_VERSION=7.4 \
     INVOICEPLANE_VERSION=1.5.11 \
@@ -12,10 +12,13 @@ ENV INVOICEPLANE_BUILD_DIR=${INVOICEPLANE_CACHE_DIR}/build \
     INVOICEPLANE_RUNTIME_DIR=${INVOICEPLANE_CACHE_DIR}/runtime
 
 RUN apt-get update \
+ && apt-get install -y software-properties-common \
+ && add-apt-repository -y ppa:ondrej/php \
+ && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y wget sudo unzip \
       php${PHP_VERSION}-fpm php${PHP_VERSION}-cli php${PHP_VERSION}-mysql \
       php${PHP_VERSION}-gd php${PHP_VERSION}-json php${PHP_VERSION}-mbstring \
-      php${PHP_VERSION}-recode php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-xml \
+      php${PHP_VERSION}-xmlrpc php${PHP_VERSION}-xml \
       mysql-client nginx gettext-base git \
  && sed -i 's/^listen = .*/listen = 0.0.0.0:9000/' /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf \
  && rm -rf /var/lib/apt/lists/*
