@@ -1,8 +1,8 @@
-FROM ubuntu:bionic-20190612
+FROM ubuntu:impish-20211102
 LABEL maintainer="sameer@damagehead.com"
 
-ENV PHP_VERSION=7.2 \
-    INVOICEPLANE_VERSION=1.5.9 \
+ENV PHP_VERSION=7.4 \
+    INVOICEPLANE_VERSION=1.5.11 \
     INVOICEPLANE_USER=www-data \
     INVOICEPLANE_INSTALL_DIR=/var/www/invoiceplane \
     INVOICEPLANE_DATA_DIR=/var/lib/invoiceplane \
